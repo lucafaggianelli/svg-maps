@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Example Map - Belgium</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <link href="/dist/svgmaps.esm.css" rel="stylesheet"></link>
+
+  <script src="https://unpkg.com/@svgdotjs/svg.js@3.0.16/dist/svg.min.js"></script>
+  <script src="https://unpkg.com/@svgdotjs/svg.panzoom.js@2.1.1/dist/svg.panzoom.min.js"></script>
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="/dist/svgmaps.umd.development.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      height: 100vh;
+    }
+
+    .popover {
+      position: absolute;
+      top: 0;
+      visibility: hidden;
+      padding: .5em 1em;
+      background-color: white;
+      border-radius: 2px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const data = {
+      BEL2: 1344241,
+      BEL3: 874048,
+      BEL3474: 1208542,
+      BEL3475: 1146175,
+      BEL3476: 494325,
+      BEL3477: 284638,
+      BEL3478: 1515064,
+      BEL3479: 1195796,
+      BEL3480: 1857986,
+      BEL3481: 1106992,
+      BEL3482: 403599
+    }
+
+    const popoverElement = document.createElement('div')
+    popoverElement.className = 'popover'
+    document.body.append(popoverElement)
+
+    SM = new SvgMaps.default({
+      mapUrl: 'https://simplemaps.com/static/svg/be/be.svg',
+      data,
+      dataType: 'bubbles',
+      title: 'Belgian population - 2019'
+    })
+
+    SM.on('region:over', (event) => {
+      const { region, data } = event.detail
+
+      popoverElement.innerHTML = `
+        <strong>${data.name}</strong><br />
+        ${(data.value || 0).toLocaleString(navigator.language, { decimalSeparator: true })}
+      `
+
+      popoverElement.style.visibility = 'visible'
+
+      popper = Popper.createPopper(region.node, popoverElement, {
+        placement: 'bottom'
+      })
+    })
+
+    SM.on('region:out', () => {
+      if (popoverElement) {
+        popoverElement.style.visibility = 'hidden'
+      }
+    })
+  </script>
+</body>
+</html>

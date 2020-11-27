@@ -1,0 +1,74 @@
+.wm-root {
+  position: relative;
+  height: 100%;
+}
+
+.wm-root svg {
+  display: block;
+}
+
+.wm-region {
+  cursor: pointer;
+  stroke: darkslategrey;
+  stroke-width: 1;
+}
+
+.wm-data-bubble {
+  cursor: pointer;
+}
+
+.wm-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-top: .25em;
+  color: white;
+  font-size: 2.5em;
+  text-align: center;
+  text-shadow: 0 0 6px rgb(0 0 0 / 0.4);
+}
+
+.wm-legend {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border-radius: 2px;
+  padding: .5em 1em;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.12);
+  max-height: calc(100% - 20px - 1em);
+  overflow-y: auto;
+}
+
+.wm-legend-entry {
+  display: flex;
+  align-items: center;
+  color: darkslategrey;
+  font-size: .9em;
+  cursor: pointer;
+}
+.wm-legend-entry:not(:last-child) {
+  margin-bottom: 4px;
+}
+.wm-legend-entry:hover {
+  color: slategrey;
+}
+.wm-legend-entry:hover .wm-legend-entry__color::after {
+  content: '';
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.13);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.wm-legend-entry__color {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  margin-right: 4px;
+  overflow: hidden;
+}
