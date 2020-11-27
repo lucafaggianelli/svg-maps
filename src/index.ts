@@ -2,6 +2,7 @@ import { Circle } from '@svgdotjs/svg.js'
 import { SVG, Svg, Element } from '@svgdotjs/svg.js'
 import '@svgdotjs/svg.panzoom.js'
 
+import './style.css'
 import { getColorShade } from './utils'
 
 interface RegionData {
